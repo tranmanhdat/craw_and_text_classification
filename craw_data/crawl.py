@@ -4,12 +4,22 @@ import os
 import time
 import sys
 
+headers = {
+    'Accept-Encoding': 'gzip, deflate, sdch',
+    'Accept-Language': 'en-US,en;q=0.8',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Cache-Control': 'max-age=0',
+    'Connection': 'keep-alive',
+}
+
 root = sys.argv[1]
 number_page = sys.argv[2]
 os.makedirs(root, exist_ok=True)
 f_log = open(root+"/craw.log", "w+", encoding="UTF-8")
 website = "https://tuoitre.vn/"
-response = requests.get(website)
+response = requests.get(website, headers=headers)
 # print(response)
 # print(response.content)
 soup = BeautifulSoup(response.content, "html.parser")
@@ -40,7 +50,7 @@ for link in sub_links:
         path_page = path_sub_folder
         page_link = link[:-4] + '/trang-'+str(i)+'.htm'
         # print(link)
-        response = requests.get(page_link)
+        response = requests.get(page_link, headers=headers)
         # print(response)
         # print(response.content)
         soup = BeautifulSoup(response.content, "html.parser")
@@ -57,7 +67,7 @@ for link in sub_links:
                 print("\t\t\tPass crawled!")
                 continue
             full_link = website + part_link[1:]
-            response = requests.get(full_link)
+            response = requests.get(full_link, headers=headers)
             soup = BeautifulSoup(response.content, "html.parser")
             list_news_tag = soup.findAll('div', class_='content fck')
             if len(list_news_tag)==0:
