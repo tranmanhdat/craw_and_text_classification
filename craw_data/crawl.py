@@ -54,6 +54,7 @@ for link in sub_links:
             path_news = os.path.join(path_page, part_link[1:].split(".")[0])
             os.makedirs(path_news, exist_ok=True)
             if len(os.listdir(path_news)) >0:
+                print("\t\t\tPass crawled!")
                 continue
             full_link = website + part_link[1:]
             response = requests.get(full_link)
