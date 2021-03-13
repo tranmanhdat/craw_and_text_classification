@@ -60,30 +60,31 @@ for link in sub_links:
         list_news_tag = soup.findAll('ul', class_='list-news-content')
         if len(list_news_tag)==0:
             continue
-        titles = list_news_tag[0].findAll('li', class_='news-item')
-        links = [x.find('a').attrs["href"] for x in titles]
-        for part_link in links:
-            path_news = os.path.join(path_page, part_link[1:].split(".")[0])
-            os.makedirs(path_news, exist_ok=True)
-            if len(os.listdir(path_news)) >0:
-                print("\t\t\tPass crawled!")
-                continue
-            full_link = website + part_link[1:]
-            response = requests.get(full_link, headers=headers)
-            soup = BeautifulSoup(response.content, "html.parser")
-            list_news_tag = soup.findAll('div', class_='content fck')
-            if len(list_news_tag)==0:
-                continue
-            contents = list_news_tag[0].findAll('p', class_=None)
-            id = 0
-            for content in contents:
-                path_file = os.path.join(path_news, str(id)+".txt")
-                with open(path_file, "w+", encoding="UTF-8") as f_write:
-                    f_write.write(content.text)
-                id = id + 1
-        end_page = time.time()
-        print("\tCrawled page {} in {:.2f}s".format(i, end_page-start_page))
-        f_log.write("\tCrawled page {} in {:.2f}s\n".format(i, end_page-start_page))
+        for list_news_tag_sub in list_news_tag:
+            titles = list_news_tag_sub.findAll('li', class_='news-item')
+            links = [x.find('a').attrs["href"] for x in titles]
+            for part_link in links:
+                path_news = os.path.join(path_page, part_link[1:].split(".")[0])
+                os.makedirs(path_news, exist_ok=True)
+                if len(os.listdir(path_news)) >0:
+                    print("\t\t\tPass crawled!")
+                    continue
+                full_link = website + part_link[1:]
+                response = requests.get(full_link, headers=headers)
+                soup = BeautifulSoup(response.content, "html.parser")
+                list_news_tag_tmp = soup.findAll('div', class_='content fck')
+                if len(list_news_tag_tmp)==0:
+                    continue
+                contents = list_news_tag_tmp[0].findAll('p', class_=None)
+                id = 0
+                for content in contents:
+                    path_file = os.path.join(path_news, str(id)+".txt")
+                    with open(path_file, "w+", encoding="UTF-8") as f_write:
+                        f_write.write(content.text)
+                    id = id + 1
+            end_page = time.time()
+            print("\tCrawled page {} in {:.2f}s".format(i, end_page-start_page))
+            f_log.write("\tCrawled page {} in {:.2f}s\n".format(i, end_page-start_page))
     end = time.time()
     print("\tTotal time crawl {} : {:.2f}".format(link[1:], end-start))
     f_log.write("\tTotal time crawl {} : {:.2f}\n".format(link[1:], end-start))
