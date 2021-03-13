@@ -36,7 +36,7 @@ for i in range(1,int(number_page)):
     # print(response.content)
     soup = BeautifulSoup(response.content, "html.parser")
     # print(soup)
-    list_news_tag = soup.findAll('a', class_='img')
+    list_news_tag = soup.findAll('a', class_='img214x133 pos-rlt')
     # print(list_news_tag)
     # titles = list_news_tag[0].findAll('li', class_='news-item')
     links = [x.attrs["href"] for x in list_news_tag]
