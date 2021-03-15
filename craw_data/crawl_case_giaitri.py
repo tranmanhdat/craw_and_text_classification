@@ -69,6 +69,7 @@ for link in sub_links:
                 if len(os.listdir(path_news)) >0:
                     print("\t\t\tPass crawled!")
                     continue
+                    print("\t\t\tCrawling!")
                 full_link = website + part_link[1:]
                 response = requests.get(full_link, headers=headers)
                 soup = BeautifulSoup(response.content, "html.parser")
