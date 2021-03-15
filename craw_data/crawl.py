@@ -57,6 +57,7 @@ for link in sub_links:
         # print(soup)
         list_news_tag = soup.findAll('ul', class_='list-news-content')
         if len(list_news_tag)==0:
+            time.sleep(0.01)
             continue
         for list_news_temp in list_news_tag:
             titles = list_news_temp.findAll('li', class_='news-item')
@@ -72,6 +73,7 @@ for link in sub_links:
                 soup = BeautifulSoup(response.content, "html.parser")
                 list_news_content = soup.findAll('div', class_='content fck')
                 if len(list_news_content)==0:
+                    time.sleep(0.01)
                     continue
                 contents = list_news_content[0].findAll('p', class_=None)
                 id = 0

@@ -59,6 +59,7 @@ for link in sub_links:
         # print(soup)
         list_news_tag = soup.findAll('ul', class_='list-news-content')
         if len(list_news_tag)==0:
+            time.sleep(0.01)
             continue
         for list_news_tag_sub in list_news_tag:
             titles = list_news_tag_sub.findAll('li', class_='news-item')
@@ -69,12 +70,12 @@ for link in sub_links:
                 if len(os.listdir(path_news)) >0:
                     print("\t\t\tPass crawled!")
                     continue
-                    print("\t\t\tCrawling!")
                 full_link = website + part_link[1:]
                 response = requests.get(full_link, headers=headers)
                 soup = BeautifulSoup(response.content, "html.parser")
                 list_news_tag_tmp = soup.findAll('div', class_='content fck')
                 if len(list_news_tag_tmp)==0:
+                    time.sleep(0.01)
                     continue
                 contents = list_news_tag_tmp[0].findAll('p', class_=None)
                 id = 0
