@@ -17,7 +17,7 @@ folder = ["thoi_su","thoi_su","phap_luat","kinh_doanh" ,"xe","nhip_song_tre", "v
 values = {"3","2","6","11","659","7","200017","10","13","661", "12"}
 root = sys.argv[1]
 number_page = sys.argv[2]
-folder_index = sys.argv[3]
+folder_index = int(sys.argv[3])
 os.makedirs(root, exist_ok=True)
 f_log = open(root+"/craw.log", "w+", encoding="UTF-8")
 website = "https://tuoitre.vn/timeline/"
