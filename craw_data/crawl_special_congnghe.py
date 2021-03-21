@@ -31,13 +31,7 @@ for i in range(1,int(number_page)):
     path_page = path_sub_folder
     page_link = link + '/timeline/200029/trang-'+str(i)+'.htm'
     # print(link)
-    while True:
-        try:
-            response = requests.get(page_link, headers=headers)
-            break
-        except:
-            time.sleep(5)
-            continue
+    response = requests.get(page_link, headers=headers)
     # print(response)
     # print(response.content)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -53,13 +47,7 @@ for i in range(1,int(number_page)):
             print("\t\t\tPass crawled!")
             continue
         full_link = link + part_link
-        while True:
-            try:
-                response = requests.get(full_link, headers=headers)
-                break
-            except:
-                time.sleep(5)
-                continue
+        response = requests.get(full_link, headers=headers)
         soup = BeautifulSoup(response.content, "html.parser")
         list_news_tag = soup.findAll('div', class_='content fck')
         if len(list_news_tag)==0:
