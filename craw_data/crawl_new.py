@@ -12,7 +12,7 @@ import sys
 #             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
 #             'X-Requested-With': 'XMLHttpRequest'
 # }
-folder = ["thoi_su","thoi_su","phap_luat","kinh_doanh" ,"xe","nhip_song_tre", "van_hoa",
+folder = ["thoi_su","the_gioi","phap_luat","kinh_doanh" ,"xe","nhip_song_tre", "van_hoa",
           "giai_tri", "giao_duc","khoa_hoc","suc_khoe"]
 values = {"3","2","6","11","659","7","200017","10","13","661", "12"}
 root = sys.argv[1]
