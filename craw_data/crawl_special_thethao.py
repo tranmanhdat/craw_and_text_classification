@@ -18,7 +18,7 @@ root = sys.argv[1]
 number_page =sys.argv[2]
 os.makedirs(root, exist_ok=True)
 f_log = open(root+"/craw.log", "w+", encoding="UTF-8")
-link = "https://thehtao.tuoitre.vn/"
+link = "https://thethao.tuoitre.vn/"
 init_start = time.time()
 start = time.time()
 print("Crawling {}".format(link))
@@ -31,7 +31,13 @@ for i in range(1,int(number_page)):
     path_page = path_sub_folder
     page_link = link + '/timeline/1209/trang-'+str(i)+'.htm'
     # print(link)
-    response = requests.get(page_link, headers=headers)
+    while True:
+        try:
+            response = requests.get(page_link, headers=headers)
+            break
+        except:
+            time.sleep(5)
+            continue
     # print(response)
     # print(response.content)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -47,7 +53,13 @@ for i in range(1,int(number_page)):
             print("\t\t\tPass crawled!")
             continue
         full_link = link + part_link
-        response = requests.get(full_link, headers=headers)
+        while True:
+            try:
+                response = requests.get(full_link, headers=headers)
+                break
+            except:
+                time.sleep(5)
+                continue
         soup = BeautifulSoup(response.content, "html.parser")
         list_news_tag = soup.findAll('div', class_='content fck')
         if len(list_news_tag)==0:

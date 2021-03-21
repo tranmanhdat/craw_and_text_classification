@@ -35,7 +35,13 @@ for i in range(1,int(number_page)):
     # path_page = os.path.join(path_sub_folder, str(i))
     path_page = path_sub_folder
     page_link = website+value+ '/trang-'+str(i)+'.htm'
-    response = requests.get(page_link)
+    while True:
+        try:
+            response = requests.get(page_link)
+            break
+        except:
+            time.sleep(5)
+            continue
     soup = BeautifulSoup(response.content, "html.parser")
     titles = soup.findAll('li', class_='news-item')
     links = [x.find('a').attrs["href"] for x in titles]
@@ -46,7 +52,12 @@ for i in range(1,int(number_page)):
             print("\t\t\tPass crawled!")
             continue
         full_link = base_website + part_link
-        response = requests.get(full_link)
+        while True:
+            try:
+                response = requests.get(full_link)
+            except:
+                time.sleep(5)
+                continue
         soup = BeautifulSoup(response.content, "html.parser")
         list_news_content = soup.findAll('div', class_='content fck')
         if len(list_news_content)==0:
