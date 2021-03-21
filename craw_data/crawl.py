@@ -3,23 +3,29 @@ from bs4 import BeautifulSoup
 import os
 import time
 import sys
-
-headers = {
-    'Accept-Encoding': 'gzip, deflate, sdch',
-    'Accept-Language': 'en-US,en;q=0.8',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'Cache-Control': 'max-age=0',
-    'Connection': 'keep-alive',
-}
+#
+# headers = {
+#     'accept' : "text/html, */*; q=0.01",
+#     'Accept-Encoding': 'gzip, deflate, br',
+#     'Accept-Language': 'vi,en-US;q=0.9,en;q=0.8',
+#     'Cookie':"G_ENABLED_IDPS=google",
+#     'Host':"tuoitre.vn",
+#     'Referer':"https://tuoitre.vn/suc-khoe/trang-99.htm",
+#     'sec-ch-ua':"\"Google Chrome\";v=\"89\", \"Chromium\";v=\"89\", \";Not A Brand\";v=\"99\"",
+#     'Sec-Fetch-Dest': "empty",
+#     'Sec-Fetch-Mode':"cors",
+#     'Sec-Fetch-Site':"cors",
+#     'User-Agent':"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+#     'X-Requested-With':"XMLHttpRequest",
+#     'Connection': 'keep-alive',
+# }
 
 root = sys.argv[1]
 number_page = sys.argv[2]
 os.makedirs(root, exist_ok=True)
 f_log = open(root+"/craw.log", "w+", encoding="UTF-8")
 website = "https://tuoitre.vn/"
-response = requests.get(website, headers=headers)
+response = requests.get(website)
 # print(response)
 # print(response.content)
 soup = BeautifulSoup(response.content, "html.parser")
@@ -50,7 +56,7 @@ for link in sub_links:
         path_page = path_sub_folder
         page_link = link[:-4] + '/trang-'+str(i)+'.htm'
         # print(link)
-        response = requests.get(page_link, headers=headers)
+        response = requests.get(page_link)
         # print(response)
         # print(response.content)
         soup = BeautifulSoup(response.content, "html.parser")
@@ -69,7 +75,7 @@ for link in sub_links:
                     print("\t\t\tPass crawled!")
                     continue
                 full_link = website + part_link[1:]
-                response = requests.get(full_link, headers=headers)
+                response = requests.get(full_link)
                 soup = BeautifulSoup(response.content, "html.parser")
                 list_news_content = soup.findAll('div', class_='content fck')
                 if len(list_news_content)==0:

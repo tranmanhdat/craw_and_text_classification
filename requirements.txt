@@ -1,3 +1,6 @@
+scikit-learn
 requests
 Pillow
 beautifulsoup4
+vncorenlp
+regex
