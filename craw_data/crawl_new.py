@@ -14,7 +14,7 @@ import sys
 # }
 folder = ["thoi_su","the_gioi","phap_luat","kinh_doanh" ,"xe","nhip_song_tre", "van_hoa",
           "giai_tri", "giao_duc","khoa_hoc","suc_khoe"]
-values = {"3","2","6","11","659","7","200017","10","13","661", "12"}
+values = ["3","2","6","11","659","7","200017","10","13","661", "12"]
 root = sys.argv[1]
 number_page = sys.argv[2]
 folder_index = int(sys.argv[3])
@@ -62,9 +62,6 @@ for i in range(1,int(number_page)):
     end_page = time.time()
     print("\tCrawled page {} in {:.2f}s".format(i, end_page-start_page))
     f_log.write("\tCrawled page {} in {:.2f}s\n".format(i, end_page-start_page))
-    end = time.time()
-    print("\tTotal time crawl {} : {:.2f}".format(link[1:], end-start))
-    f_log.write("\tTotal time crawl {} : {:.2f}\n".format(link[1:], end-start))
 init_end = time.time()
 print("\n\nTotal crawl time {:.2f}".format(init_end-init_start))
 f_log.write("\n\nTotal crawl time {:.2f}".format(init_end-init_start))
