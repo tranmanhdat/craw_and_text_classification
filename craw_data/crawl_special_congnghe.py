@@ -48,6 +48,7 @@ while i<int(number_page):
         if len(os.listdir(path_news))>0:
             print("\t\t\tPass crawled!")
             forward = True
+        if forward:
             break
         full_link = link + part_link
         response = requests.get(full_link, headers=headers)

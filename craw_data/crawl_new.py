@@ -53,6 +53,7 @@ while i<int(number_page):
         if len(os.listdir(path_news)) >0:
             print("\t\t\tPass crawled!")
             forward = True
+        if forward:
             break
         full_link = base_website + part_link
         while True:
