@@ -50,7 +50,7 @@ for i in range(1,int(number_page)):
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news)) >0:
             print("\t\t\tPass crawled!")
-            continue
+            break
         full_link = base_website + part_link
         while True:
             try:
