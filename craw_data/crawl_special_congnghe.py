@@ -17,7 +17,7 @@ headers = {
 root = sys.argv[1]
 number_page =sys.argv[2]
 os.makedirs(root, exist_ok=True)
-f_log = open(root+"/craw.log", "w+", encoding="UTF-8")
+f_log = open(root+"/craw_congnghe.log", "w+", encoding="UTF-8")
 link = "https://congnghe.tuoitre.vn/"
 init_start = time.time()
 start = time.time()
@@ -45,7 +45,6 @@ while i<int(number_page):
         path_news = os.path.join(path_page, part_link[1:].split(".")[0])
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news))>0:
-            print("\t\t\tPass crawled!")
             continue
         full_link = link + part_link
         response = requests.get(full_link, headers=headers)
