@@ -53,6 +53,7 @@ while i<int(number_page):
         if len(os.listdir(path_news)) >0:
             print("\t\t\tPass crawled!")
             forward = True
+            i = i +100
         if forward:
             break
         full_link = base_website + part_link
@@ -74,9 +75,6 @@ while i<int(number_page):
             with open(path_file, "w+", encoding="UTF-8") as f_write:
                 f_write.write(content.text)
             id = id + 1
-    if forward:
-        i = i + 100
-        continue
     end_page = time.time()
     print("\tCrawled page {} in {:.2f}s".format(i, end_page-start_page))
     f_log.write("\tCrawled page {} in {:.2f}s\n".format(i, end_page-start_page))
