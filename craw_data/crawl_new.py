@@ -30,7 +30,8 @@ print("Crawling {}".format(link))
 f_log.write("Crawling {}\n".format(link))
 path_sub_folder = os.path.join(root, link)
 os.makedirs(path_sub_folder, exist_ok=True)
-for i in range(1,int(number_page)):
+i = 0
+while i<int(number_page):
     start_page = time.time()
     # path_page = os.path.join(path_sub_folder, str(i))
     path_page = path_sub_folder
@@ -45,11 +46,13 @@ for i in range(1,int(number_page)):
     soup = BeautifulSoup(response.content, "html.parser")
     titles = soup.findAll('li', class_='news-item')
     links = [x.find('a').attrs["href"] for x in titles]
+    forward = False
     for part_link in links:
         path_news = os.path.join(path_page, part_link[1:].split(".")[0])
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news)) >0:
             print("\t\t\tPass crawled!")
+            forward = True
             break
         full_link = base_website + part_link
         while True:
@@ -70,9 +73,13 @@ for i in range(1,int(number_page)):
             with open(path_file, "w+", encoding="UTF-8") as f_write:
                 f_write.write(content.text)
             id = id + 1
+    if forward:
+        i = i + 100
+        continue
     end_page = time.time()
     print("\tCrawled page {} in {:.2f}s".format(i, end_page-start_page))
     f_log.write("\tCrawled page {} in {:.2f}s\n".format(i, end_page-start_page))
+    i = i + 1
 init_end = time.time()
 print("\n\nTotal crawl time {:.2f}".format(init_end-init_start))
 f_log.write("\n\nTotal crawl time {:.2f}".format(init_end-init_start))
