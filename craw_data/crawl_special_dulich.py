@@ -41,16 +41,12 @@ while i<int(number_page):
     # print(list_news_tag)
     # titles = list_news_tag[0].findAll('li', class_='news-item')
     links = [x.attrs["href"] for x in list_news_tag]
-    forward = False
     for part_link in links:
         path_news = os.path.join(path_page, part_link[1:].split(".")[0])
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news))>0:
             print("\t\t\tPass crawled!")
-            forward = True
             i = i  + 100
-        if forward:
-            break
         full_link = link + part_link
         response = requests.get(full_link, headers=headers)
         soup = BeautifulSoup(response.content, "html.parser")
@@ -64,9 +60,6 @@ while i<int(number_page):
             with open(path_file, "w+", encoding="UTF-8") as f_write:
                 f_write.write(content.text)
             id = id + 1
-    if forward:
-        i = i + 100
-        continue
     end_page = time.time()
     print("\tCrawled page {} in {:.2f}s".format(i, end_page-start_page))
     f_log.write("\tCrawled page {} in {:.2f}s\n".format(i, end_page-start_page))

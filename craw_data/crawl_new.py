@@ -46,16 +46,12 @@ while i<int(number_page):
     soup = BeautifulSoup(response.content, "html.parser")
     titles = soup.findAll('li', class_='news-item')
     links = [x.find('a').attrs["href"] for x in titles]
-    forward = False
     for part_link in links:
         path_news = os.path.join(path_page, part_link[1:].split(".")[0])
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news)) >0:
             print("\t\t\tPass crawled!")
-            forward = True
             i = i +100
-        if forward:
-            break
         full_link = base_website + part_link
         while True:
             try:
