@@ -45,7 +45,7 @@ while i<int(number_page):
         path_news = os.path.join(path_page, part_link[1:].split(".")[0])
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news))>0:
-            continue
+            break
         full_link = link + part_link
         response = requests.get(full_link, headers=headers)
         soup = BeautifulSoup(response.content, "html.parser")

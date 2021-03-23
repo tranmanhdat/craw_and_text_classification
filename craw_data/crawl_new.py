@@ -19,7 +19,7 @@ root = sys.argv[1]
 number_page = sys.argv[2]
 folder_index = int(sys.argv[3])
 os.makedirs(root, exist_ok=True)
-f_log = open(root+"/craw"+str(number_page)+".log", "w+", encoding="UTF-8")
+f_log = open(root+"/craw"+str(folder_index)+".log", "w+", encoding="UTF-8")
 website = "https://tuoitre.vn/timeline/"
 base_website = "https://tuoitre.vn"
 init_start = time.time()
@@ -50,7 +50,7 @@ while i<int(number_page):
         path_news = os.path.join(path_page, part_link[1:].split(".")[0])
         os.makedirs(path_news, exist_ok=True)
         if len(os.listdir(path_news)) >0:
-            continue
+            break
         full_link = base_website + part_link
         while True:
             try:
