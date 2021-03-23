@@ -48,6 +48,7 @@ while i<int(number_page):
             print("\t\t\tPass crawled!")
             print(i)
             i = i + 100
+            break
         full_link = link + part_link
         response = requests.get(full_link, headers=headers)
         soup = BeautifulSoup(response.content, "html.parser")

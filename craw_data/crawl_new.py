@@ -53,6 +53,7 @@ while i<int(number_page):
             print("\t\t\tPass crawled!")
             print(i)
             i = i +100
+            break
         full_link = base_website + part_link
         while True:
             try:
