@@ -11,6 +11,7 @@ if __name__ == '__main__':
     os.makedirs(folder_out, exist_ok=True)
     folders = [d for d in os.listdir(folder_in) if
                os.path.isdir(os.path.join(folder_in, d))]
+    print(folders)
     for folder in folders:
         list_files = []
         sub_folder = os.path.join(folder_in, folder)
@@ -19,14 +20,16 @@ if __name__ == '__main__':
         news_folders = os.listdir(sub_folder)
         for news_folder in news_folders:
             path_news = os.path.join(sub_folder, news_folder)
-            files = [os.path.join(path_news, file) for file in os.listdir(path_news)]
-            if len(files)>0:
-                list_files = list_files + files
+            for file in os.listdir(path_news):
+                file = os.path.join(path_news, file)
+                list_files.append(file)
         if len(list_files)>int(number_files):
             random.shuffle(list_files)
             list_files = list_files[:int(number_files)]
         id = 1
         for file in list_files:
-            shutil.move(file, os.path.join(save_sub_folder, str(id)+".txt"))
+            shutil.copyfile(file, os.path.join(save_sub_folder, str(id)+".txt"))
             id = id + 1
+            if id >10000:
+                exit(1)
         print("Processed {} done!".format(folder))
