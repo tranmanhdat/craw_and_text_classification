@@ -185,8 +185,8 @@ def text_preprocess(document):
 def process_text(f_in, f_out):
     f_read = codecs.open(f_in, "r", encoding='utf-8')
     text = f_read.read()
-    text = text_preprocess(text)
     if len(text) > 20:
+        text = text_preprocess(text)
         f_write = codecs.open(f_out, "w+", encoding='utf-8')
         f_write.write(text)
         f_write.close()
