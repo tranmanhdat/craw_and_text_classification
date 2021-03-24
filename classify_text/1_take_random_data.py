@@ -33,6 +33,4 @@ if __name__ == '__main__':
         for file in list_files:
             shutil.copyfile(file, os.path.join(save_sub_folder, str(id)+".txt"))
             id = id + 1
-            if id >10000:
-                exit(1)
         print("Processed {} done!".format(folder))
