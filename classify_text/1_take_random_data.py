@@ -17,10 +17,13 @@ if __name__ == '__main__':
         sub_folder = os.path.join(folder_in, folder)
         save_sub_folder = os.path.join(folder_out, folder)
         os.makedirs(save_sub_folder, exist_ok=True)
-        news_folders = os.listdir(sub_folder)
+        news_folders = [d for d in os.listdir(sub_folder) if
+               os.path.isdir(os.path.join(sub_folder, d))]
         for news_folder in news_folders:
             path_news = os.path.join(sub_folder, news_folder)
-            for file in os.listdir(path_news):
+            files = [d for d in os.listdir(path_news) if
+               os.path.isfile(os.path.join(path_news, d))]
+            for file in files:
                 file = os.path.join(path_news, file)
                 list_files.append(file)
         if len(list_files)>int(number_files):
