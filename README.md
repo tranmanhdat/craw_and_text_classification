@@ -35,6 +35,7 @@ python classify_text/3_cal_freq.py ../data_2 freq_text
 python classify_text/4_remove_stop_words.py ../data_2 ../data_4
 python classify_text/5_split_train_test.py ../data_4 ../data_5
 ```
+Anyway, you can use my prepared data [data_5](https://drive.google.com/file/d/1aXlLp-tGWxDabV8gH39jwzBVZmiHp7h8/view?usp=sharing)
 ## Classify
 ```
 python classify_text/6.1_Naive_Bayes_Classifier.py
